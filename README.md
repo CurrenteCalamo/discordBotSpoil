@@ -20,5 +20,5 @@ $ npm run start
 ```
 ## Stay in touch
 - Author - [George Khrulev](https://github.com/CurrenteCalamo)
-- Website - [currentecalamo.com](https://currentecalamo.github.io/)
+- Website - [currentecalamo.github.io](https://currentecalamo.github.io/)
 - Twitter - [@currentecalamo](https://twitter.com/currentecalamo)

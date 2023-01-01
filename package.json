@@ -40,5 +40,8 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "dependencies": {
+    "discord.js": "^14.7.1"
   }
 }

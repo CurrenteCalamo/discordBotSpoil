@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:nodemon": "npx nodemon",
     "build": "rimraf ./build && npx tsc",
-    "start": "npm run build && node build/main"
+    "start": "npm run build && node build/main",
+    "lint": "npx eslint ./src",
+    "format": "npx eslint ./src --fix"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,9 @@
   "homepage": "https://github.com/CurrenteCalamo/discordBotSpoil#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "eslint": "^8.31.0",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",

@@ -1,0 +1,25 @@
+{
+  "name": "discordbotspoil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CurrenteCalamo/discordBotSpoil.git"
+  },
+  "keywords": [],
+  "author": "George Khrulev <pppp43777@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CurrenteCalamo/discordBotSpoil/issues"
+  },
+  "homepage": "https://github.com/CurrenteCalamo/discordBotSpoil#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4"
+  }
+}

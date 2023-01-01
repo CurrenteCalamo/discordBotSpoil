@@ -1,5 +1,4 @@
 # discordBotSpoil
-discordBotSpoil is a self contained bot with source code easy to combine.
 
 ## Install
 

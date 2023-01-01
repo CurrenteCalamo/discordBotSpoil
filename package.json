@@ -27,6 +27,7 @@
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
+    "dotenv": "^16.0.3",
     "eslint": "^8.31.0",
     "husky": "^8.0.2",
     "nodemon": "^2.0.20",

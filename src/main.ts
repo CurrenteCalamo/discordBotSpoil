@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
 import * as fs from 'fs'
-
 dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)
@@ -28,7 +27,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isCommand()) return
   const command = commands.get(interaction.commandName)
   try {
-    command?.execute(interaction, client)
+    command?.execute(interaction)
   } catch (error) {
     console.error(error)
     await interaction.reply({

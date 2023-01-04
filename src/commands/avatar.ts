@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
+import { CommandInteraction } from 'discord.js'
 
 export default {
   data: new SlashCommandBuilder()
@@ -19,9 +20,7 @@ export default {
           ru: 'Аватар пользователя для показа',
         }),
     ),
-  async execute(interaction: any) {
-    const target = interaction.options.getUser('target')
-
+  async execute(interaction:CommandInteraction) {
     return await interaction.reply({
       content: 'avatar',
     })

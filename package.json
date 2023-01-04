@@ -10,7 +10,7 @@
     "deploy-commands": "npm run build && node build/deploy-commands",
     "build": "rimraf ./build && npx tsc",
     "start": "npm run build && node build/main",
-    "lint": "npx eslint ./src",
+    "lint": "npx eslint ./src --max-warnings=0",
     "format": "npx eslint ./src --fix",
     "prepare": "husky install"
   },

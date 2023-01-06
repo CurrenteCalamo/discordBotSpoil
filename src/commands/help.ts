@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
 import * as fs from 'fs'
-import { SlashCommandInterface } from '../types/index.js'
 dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)

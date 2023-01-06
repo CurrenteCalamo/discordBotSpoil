@@ -1,6 +1,6 @@
-import { Client, Collection, GatewayIntentBits } from 'discord.js'
+import { Collection, GatewayIntentBits, TextChannel } from 'discord.js'
+import { Events, ActivityType, Client } from 'discord.js'
 import { SlashCommandInterface } from './types/index.js'
-import { Events, ActivityType } from 'discord.js'
 import { fileURLToPath } from 'url'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
@@ -11,7 +11,12 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildIntegrations],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildIntegrations,
+  ],
 })
 
 const commands = new Collection<string, SlashCommandInterface>()
@@ -35,6 +40,30 @@ client.on(Events.InteractionCreate, async (interaction) => {
       ephemeral: true,
     })
   }
+})
+
+client.on(Events.MessageDelete, async (message) => {
+  if (message.author?.id === client.user?.id) return
+  client.channels.cache.find((elementl) => {
+    if (elementl instanceof TextChannel && elementl.name === 'delete') {
+      elementl.send({
+        content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
+        files: Array.from(message.attachments.values()),
+      })
+    }
+  })
+})
+
+client.on(Events.MessageUpdate, async (message) => {
+  if (message.author?.id === client.user?.id) return
+  client.channels.cache.find((elementl) => {
+    if (elementl instanceof TextChannel && elementl.name === 'update') {
+      elementl.send({
+        content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
+        files: Array.from(message.attachments.values()),
+      })
+    }
+  })
 })
 
 client.on(Events.ShardReady, () => {

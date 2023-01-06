@@ -1,11 +1,10 @@
-import { ChannelType, Client, Collection, GatewayIntentBits } from 'discord.js'
+import { Collection, GatewayIntentBits, TextChannel } from 'discord.js'
+import { Events, ActivityType, Client } from 'discord.js'
 import { SlashCommandInterface } from './types/index.js'
-import { Events, ActivityType } from 'discord.js'
 import { fileURLToPath } from 'url'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
 import * as fs from 'fs'
-
 dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)
@@ -45,28 +44,26 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 client.on(Events.MessageDelete, async (message) => {
   if (message.author?.id === client.user?.id) return
-
-  const channel = client.channels.cache.get('1008015562158387301')
-  console.log(message?.attachments)
-  if (channel?.type === ChannelType.GuildText) {
-    await channel?.send({
-      content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
-      files: Array.from(message.attachments.values()),
-    })
-  }
+  client.channels.cache.find((elementl) => {
+    if (elementl instanceof TextChannel && elementl.name === 'delete') {
+      elementl.send({
+        content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
+        files: Array.from(message.attachments.values()),
+      })
+    }
+  })
 })
 
 client.on(Events.MessageUpdate, async (message) => {
   if (message.author?.id === client.user?.id) return
-
-  const channel = client.channels.cache.get('1009751386923204688')
-  console.log(message?.attachments)
-  if (channel?.type === ChannelType.GuildText) {
-    await channel?.send({
-      content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
-      files: Array.from(message.attachments.values()),
-    })
-  }
+  client.channels.cache.find((elementl) => {
+    if (elementl instanceof TextChannel && elementl.name === 'update') {
+      elementl.send({
+        content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
+        files: Array.from(message.attachments.values()),
+      })
+    }
+  })
 })
 
 client.on(Events.ShardReady, () => {

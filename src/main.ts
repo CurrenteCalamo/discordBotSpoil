@@ -1,20 +1,10 @@
-import {
-  Channel,
-  ChannelType,
-  Client,
-  Collection,
-  GatewayIntentBits,
-  TextChannel,
-  ThreadChannel,
-} from 'discord.js'
+import { ChannelType, Client, Collection, GatewayIntentBits } from 'discord.js'
 import { SlashCommandInterface } from './types/index.js'
 import { Events, ActivityType } from 'discord.js'
 import { fileURLToPath } from 'url'
 import * as dotenv from 'dotenv'
 import * as path from 'path'
 import * as fs from 'fs'
-import { Snowflake } from '@sapphire/snowflake'
-import { channel } from 'diagnostics_channel'
 
 dotenv.config()
 
@@ -57,6 +47,19 @@ client.on(Events.MessageDelete, async (message) => {
   if (message.author?.id === client.user?.id) return
 
   const channel = client.channels.cache.get('1008015562158387301')
+  console.log(message?.attachments)
+  if (channel?.type === ChannelType.GuildText) {
+    await channel?.send({
+      content: `<@${message.author?.id}> <#${message.channel?.id}>\n${message?.content}`,
+      files: Array.from(message.attachments.values()),
+    })
+  }
+})
+
+client.on(Events.MessageUpdate, async (message) => {
+  if (message.author?.id === client.user?.id) return
+
+  const channel = client.channels.cache.get('1009751386923204688')
   console.log(message?.attachments)
   if (channel?.type === ChannelType.GuildText) {
     await channel?.send({

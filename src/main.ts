@@ -16,6 +16,9 @@ const client = new Client({
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildIntegrations,
+    GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.DirectMessages,
   ],
 })
 
@@ -67,8 +70,15 @@ client.on(Events.MessageUpdate, async (message) => {
 })
 
 client.on(Events.GuildCreate, async (guild) => {
-  const owner = client.users.cache.get(guild.ownerId)
-  await owner?.send({})
+  const user = client.users.cache.get(guild.ownerId)
+  user?.send({
+    content:
+      '**COMMUNITY LINKS**\n\n\
+*These sites are hosted by various community members:*\n\n\
+<:sleepy:1015946747375267910> Discord — https://discord.gg/CxR366an4c\n\
+<:sick:1015946721425109042> Spoil Planner — https://github.com/CurrenteCalamo\n\
+<:bathes:1015946384173699113> Spoil Predictor — https://spoil.github.io/',
+  })
 })
 
 client.on(Events.ShardReady, () => {

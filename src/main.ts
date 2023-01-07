@@ -66,6 +66,11 @@ client.on(Events.MessageUpdate, async (message) => {
   })
 })
 
+client.on(Events.GuildCreate, async (guild) => {
+  const owner = client.users.cache.get(guild.ownerId)
+  await owner?.send({})
+})
+
 client.on(Events.ShardReady, () => {
   console.log(`Logged in as ${client.user?.tag}!`)
   client.user?.setStatus('dnd')

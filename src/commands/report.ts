@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
+import { CommandInteraction, TextChannel } from 'discord.js'
 
 export default {
   data: new SlashCommandBuilder()
@@ -36,11 +36,24 @@ export default {
         .setDescriptionLocalizations({
           uk: 'Вкладений файл',
           ru: 'Прикрепить файл',
-        }),
+        })
+        .setRequired(true),
     ),
   async execute(interaction: CommandInteraction) {
+    const user = interaction.options.getUser('target')
+    const message = interaction.options.get('message')
+    // const attachment = interaction.options.get('attachment')
+    const content = `<@${interaction.user.id}>, **Complaint** about user <@${user?.id}> **sent!**`
+
+    interaction.guild?.channels.cache.find((elementl) => {
+      if (elementl instanceof TextChannel && elementl.name === 'report') {
+        elementl.send({
+          content: content + `\n${message}`,
+        })
+      }
+    })
     return await interaction.reply({
-      content: 'report',
+      content,
       ephemeral: true,
     })
   },

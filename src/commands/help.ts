@@ -1,10 +1,8 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction } from 'discord.js'
 import { fileURLToPath } from 'url'
-import * as dotenv from 'dotenv'
 import * as path from 'path'
 import * as fs from 'fs'
-dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
+import User from '../models/User.js'
 
 export default {
   data: new SlashCommandBuilder()
@@ -10,8 +11,33 @@ export default {
       ru: 'Показать мое время онлайн.',
     }),
   async execute(interaction: CommandInteraction) {
+    let user = await User.findOne({
+      userId: interaction.user.id,
+      guildId: interaction.guild?.id,
+    })
+    if (!user)
+      user = await User.create({
+        userId: interaction.user.id,
+        guildId: interaction.guild?.id,
+      })
+
+    const Embed = new EmbedBuilder()
+      .setTitle(`Online time - ${interaction.user.username}`)
+      .setThumbnail(interaction.user.displayAvatarURL({ forceStatic: true }))
+      .addFields(
+        {
+          name: 'Per day',
+          value: `\`\`\`${user.voiceDayTime}\`\`\``,
+          inline: true,
+        },
+        {
+          name: 'During all this time',
+          value: `\`\`\`${user.voiceAllTime}\`\`\``,
+          inline: true,
+        },
+      )
     return await interaction.reply({
-      content: 'voice',
+      embeds: [Embed],
     })
   },
 }
